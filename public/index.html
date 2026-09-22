@@ -1,0 +1,103 @@
+<!doctype html>
+<html lang="fr">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover">
+  <meta name="theme-color" content="#ff6b00">
+  <meta name="description" content="TRAJECTOIRE relie chaque effort de transformation à un résultat observable et à une valeur d’entreprise défendable.">
+  <title>TRAJECTOIRE · Transformation Value OS</title>
+  <link rel="manifest" href="/manifest.webmanifest">
+  <link rel="icon" href="/icons/icon.svg" type="image/svg+xml">
+  <link rel="stylesheet" href="/styles.css">
+</head>
+<body>
+  <header class="signal-bar" aria-label="État du portefeuille">
+    <button class="live-mark" data-action="navigate" data-view="command" aria-label="Ouvrir le centre de commandement">
+      <span class="live-dot"></span>
+      <span>TRAJECTOIRE</span>
+      <strong>LIVE</strong>
+    </button>
+    <div class="signal-stream" id="signalStream" aria-live="polite"></div>
+    <div class="signal-time mono" id="liveClock">--:--:--</div>
+  </header>
+
+  <div class="app-shell">
+    <aside class="sidebar" id="sidebar">
+      <div class="brand-block">
+        <a class="brand" href="#command" data-action="navigate" data-view="command" aria-label="TRAJECTOIRE, accueil">
+          <span class="brand-symbol" aria-hidden="true">
+            <svg viewBox="0 0 38 38"><path d="M8 29.5C10.6 23 13.9 13.2 20.2 9.3c3.7-2.3 7.4-.5 8.2 2.4.8 2.8-1.1 5.8-4.3 6.1-3.9.4-6.3-4-3.5-6.5"/><circle cx="8" cy="29.5" r="3"/><path d="M8 29.5h21"/></svg>
+          </span>
+          <span><b>TRAJECTOIRE</b><small>Transformation Value OS</small></span>
+        </a>
+        <button class="icon-button mobile-only" id="closeSidebar" aria-label="Fermer la navigation">×</button>
+      </div>
+
+      <nav class="primary-nav" aria-label="Navigation principale">
+        <p class="nav-section">Piloter</p>
+        <button class="nav-item active" data-action="navigate" data-view="command">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><rect x="3" y="3" width="7" height="7" rx="2"/><rect x="14" y="3" width="7" height="7" rx="2"/><rect x="3" y="14" width="7" height="7" rx="2"/><rect x="14" y="14" width="7" height="7" rx="2"/></svg>
+          <span>Commandement</span><kbd>1</kbd>
+        </button>
+        <button class="nav-item" data-action="navigate" data-view="flows">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="5" cy="6" r="2"/><circle cx="19" cy="6" r="2"/><circle cx="12" cy="18" r="2"/><path d="M7 6h10M6.7 7.5l4.2 8.8M17.3 7.5l-4.2 8.8"/></svg>
+          <span>Chaîne de valeur</span><kbd>2</kbd>
+        </button>
+        <button class="nav-item" data-action="navigate" data-view="portfolio">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M9 5h11M9 12h11M9 19h11"/><circle cx="4" cy="5" r="1.5"/><circle cx="4" cy="12" r="1.5"/><circle cx="4" cy="19" r="1.5"/></svg>
+          <span>Portefeuille</span><kbd>3</kbd>
+        </button>
+        <button class="nav-item" data-action="navigate" data-view="evidence">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 4h16v16H4z"/><path d="M8 15l2.5-3 2.4 2 3.5-5 1.6 2"/><path d="M8 8h3"/></svg>
+          <span>Preuves & mesure</span><kbd>4</kbd>
+        </button>
+
+        <p class="nav-section">Décider</p>
+        <button class="nav-item" data-action="navigate" data-view="strategy">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M12 3l8 4-8 4-8-4 8-4z"/><path d="M4 12l8 4 8-4M4 17l8 4 8-4"/></svg>
+          <span>Stratégie</span><kbd>5</kbd>
+        </button>
+        <button class="nav-item" data-action="navigate" data-view="scenarios">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><path d="M4 19V5M4 19h16"/><path d="M7 15l4-5 3 2 5-7"/></svg>
+          <span>Scénarios</span><kbd>6</kbd>
+        </button>
+        <button class="nav-item" data-action="navigate" data-view="research">
+          <svg viewBox="0 0 24 24" aria-hidden="true"><circle cx="11" cy="11" r="7"/><path d="M20 20l-4-4M8 11h6M11 8v6"/></svg>
+          <span>Contexte entreprise</span><kbd>7</kbd>
+        </button>
+      </nav>
+
+      <div class="sidebar-spacer"></div>
+      <div class="principle-card">
+        <span class="mini-label">RÈGLE DE DÉCISION</span>
+        <strong>Une heure gagnée n’est pas encore de la valeur.</strong>
+        <p>TRAJECTOIRE suit sa réallocation jusqu’au résultat observé.</p>
+      </div>
+      <div class="profile-chip">
+        <div class="avatar">AM</div>
+        <div><strong>Abbas Mistrah</strong><span>Transformation & gouvernance IA</span></div>
+        <span class="status-dot" title="Base locale active"></span>
+      </div>
+    </aside>
+
+    <section class="workspace">
+      <header class="workspace-header">
+        <button class="icon-button mobile-only" id="openSidebar" aria-label="Ouvrir la navigation">☰</button>
+        <div class="breadcrumb"><span>TRAJECTOIRE</span><i>/</i><strong id="currentViewLabel">Commandement</strong></div>
+        <div class="workspace-actions">
+          <button class="button ghost compact" data-action="export"><span>Exporter</span></button>
+          <button class="button primary compact" data-action="new-initiative"><span>＋</span> Nouvelle initiative</button>
+        </div>
+      </header>
+      <main id="view" tabindex="-1" aria-live="polite"></main>
+    </section>
+  </div>
+
+  <div class="modal-backdrop" id="modalBackdrop" hidden>
+    <section class="modal" id="modal" role="dialog" aria-modal="true" aria-labelledby="modalTitle"></section>
+  </div>
+  <div class="toast-stack" id="toastStack" aria-live="polite"></div>
+  <button class="install-button" id="installButton" hidden>Installer l’application</button>
+  <script src="/app.js" defer></script>
+</body>
+</html>

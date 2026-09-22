@@ -1,0 +1,27 @@
+{
+  "name": "trajectoire-transformation-value-os",
+  "version": "1.0.0",
+  "private": false,
+  "description": "A proof-driven transformation operating system: trace effort, outcomes and measurable enterprise value.",
+  "author": "Abbas Mistrah",
+  "license": "MIT",
+  "main": "server.js",
+  "engines": {
+    "node": ">=22.5.0"
+  },
+  "scripts": {
+    "start": "node server.js",
+    "dev": "node --watch server.js",
+    "test": "node --test --test-isolation=none",
+    "check": "node --check server.js && node --check src/database.js && node --check src/engine.js && node --check public/app.js"
+  },
+  "keywords": [
+    "transformation",
+    "roi",
+    "value-realization",
+    "strategy",
+    "portfolio",
+    "pwa",
+    "sqlite"
+  ]
+}

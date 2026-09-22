@@ -1,0 +1,20 @@
+{
+  "name": "TRAJECTOIRE · Transformation Value OS",
+  "short_name": "TRAJECTOIRE",
+  "description": "Du temps investi à la valeur prouvée : portefeuille, chaîne causale, stratégie et mesure de transformation.",
+  "id": "/",
+  "start_url": "/#command",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#f6f0e6",
+  "theme_color": "#ff6b00",
+  "lang": "fr",
+  "categories": ["business", "productivity", "finance"],
+  "icons": [
+    { "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ],
+  "shortcuts": [
+    { "name": "Commandement", "url": "/#command", "icons": [{ "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }] },
+    { "name": "Nouvelle initiative", "url": "/#portfolio?action=new", "icons": [{ "src": "/icons/icon.svg", "sizes": "any", "type": "image/svg+xml" }] }
+  ]
+}
