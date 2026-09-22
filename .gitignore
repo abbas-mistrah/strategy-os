@@ -1,3 +1,4 @@
+# STRATEGY OS — generated and local-only artifacts
 node_modules/
 data/*.db
 data/*.db-shm

@@ -1,5 +1,7 @@
 'use strict';
 
+// STRATEGY OS — Transformation Intelligence & ROI engine verification.
+
 const test = require('node:test');
 const assert = require('node:assert/strict');
 const { calculateInitiative, calculatePortfolio, departmentOpportunity, buildStrategy } = require('../src/engine');
