@@ -6,8 +6,8 @@ const { DatabaseSync } = require('node:sqlite');
 
 const projectRoot = path.resolve(__dirname, '..');
 const dataDirectory = path.join(projectRoot, 'data');
-const databasePath = process.env.TRAJECTOIRE_DB || path.join(dataDirectory, 'trajectoire.db');
 fs.mkdirSync(dataDirectory, { recursive: true });
+const databasePath = process.env.STRATEGY_OS_DB || path.join(dataDirectory, 'strategy-os.db');
 
 const db = new DatabaseSync(databasePath);
 db.exec(fs.readFileSync(path.join(__dirname, 'schema.sql'), 'utf8'));

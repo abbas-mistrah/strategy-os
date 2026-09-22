@@ -1,4 +1,4 @@
-const CACHE = 'trajectoire-v1';
+const CACHE = 'strategy-os-v2';
 const CORE = ['/', '/index.html', '/styles.css', '/app.js', '/manifest.webmanifest', '/icons/icon.svg'];
 
 self.addEventListener('install', event => {

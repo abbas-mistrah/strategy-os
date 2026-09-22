@@ -144,7 +144,7 @@ svg { display: block; }
 }
 .brand-symbol svg { width: 26px; height: 26px; fill: none; stroke: #fff; stroke-width: 2.8; stroke-linecap: round; stroke-linejoin: round; }
 .brand b { display: block; color: var(--orange-deep); font-size: .92rem; font-weight: 900; letter-spacing: -.035em; }
-.brand small { display: block; margin-top: 2px; color: var(--muted); font-size: .58rem; font-weight: 750; letter-spacing: .05em; text-transform: uppercase; }
+.brand small { display: block; max-width: 164px; margin-top: 2px; color: var(--muted); font-size: .52rem; font-weight: 750; line-height: 1.2; letter-spacing: .035em; text-transform: uppercase; }
 
 .primary-nav { display: flex; flex-direction: column; gap: 3px; }
 .nav-section { margin: 12px 10px 5px; color: var(--soft); font-size: .6rem; font-weight: 850; letter-spacing: .12em; text-transform: uppercase; }

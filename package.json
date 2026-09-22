@@ -1,8 +1,8 @@
 {
-  "name": "trajectoire-transformation-value-os",
+  "name": "strategy-os-transformation-intelligence-roi",
   "version": "1.0.0",
   "private": false,
-  "description": "A proof-driven transformation operating system: trace effort, outcomes and measurable enterprise value.",
+  "description": "Transformation Intelligence & ROI: design strategy, track execution, attribute value and prove ROI.",
   "author": "Abbas Mistrah",
   "license": "MIT",
   "main": "server.js",

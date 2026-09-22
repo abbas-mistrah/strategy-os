@@ -1,12 +1,16 @@
-# TRAJECTOIRE
+# STRATEGY OS
 
-**Transformation Value OS — du temps investi à la valeur prouvée.**
+### Transformation Intelligence & ROI
 
-TRAJECTOIRE est un logiciel local-first de pilotage de la transformation. Il relie les ressources engagées, les changements de travail, les résultats observés et la valeur réellement attribuable à l’entreprise.
+**From Strategy to Proof of Value**
 
-Ce n’est pas un calculateur de ROI. Un calculateur transforme des hypothèses en un chiffre. TRAJECTOIRE transforme un portefeuille d’initiatives en un système de décisions : chaque valeur publiée conserve sa baseline, sa source, son niveau de preuve, son taux d’adoption, son attribution et son coût complet.
+*Design the right transformation strategy. Track execution. Measure impact. Attribute value. Prove ROI.*
 
-![Centre de commandement TRAJECTOIRE](docs/screenshots/command-center.png)
+STRATEGY OS est un logiciel local-first de pilotage stratégique de la transformation. Il relie le contexte de l’entreprise, les ressources engagées, l’exécution, les résultats observés, la valeur attribuable et le ROI réellement défendable.
+
+Ce n’est pas un simple calculateur de ROI. Un calculateur transforme des hypothèses en un chiffre. STRATEGY OS transforme un portefeuille d’initiatives en système de décisions : chaque valeur publiée conserve sa baseline, sa source, son niveau de preuve, son taux d’adoption, son attribution et son coût complet.
+
+![Strategy Command — STRATEGY OS](docs/screenshots/command-center.png)
 
 ## Ce que le produit résout
 
@@ -17,7 +21,7 @@ Les programmes de transformation savent généralement compter les projets, les 
 3. Quel résultat observable a changé ?
 4. Quelle part de cette amélioration peut raisonnablement être attribuée à l’initiative ?
 
-TRAJECTOIRE installe cette continuité de preuve dans un seul produit.
+STRATEGY OS installe cette continuité de décision et de preuve dans un seul produit.
 
 ## Sept surfaces de décision
 
@@ -84,10 +88,10 @@ npm start
 
 Puis ouvrir [http://127.0.0.1:4310](http://127.0.0.1:4310).
 
-Sous Windows, `launch-trajectoire.ps1` démarre le serveur en arrière-plan et ouvre une fenêtre Chrome dédiée :
+Sous Windows, `launch-strategy-os.ps1` démarre le serveur en arrière-plan et ouvre une fenêtre Chrome dédiée :
 
 ```powershell
-powershell -ExecutionPolicy Bypass -File .\launch-trajectoire.ps1
+powershell -ExecutionPolicy Bypass -File .\launch-strategy-os.ps1
 ```
 
 Pour créer le raccourci Bureau :
@@ -132,14 +136,14 @@ Voir [docs/ARCHITECTURE.md](docs/ARCHITECTURE.md) pour le schéma de données, l
 
 ## Données et confidentialité
 
-- La base est enregistrée dans `data/trajectoire.db` et exclue de Git.
+- La base est enregistrée dans `data/strategy-os.db` et exclue de Git.
 - Une nouvelle base reçoit uniquement des données de démonstration fictives.
 - Aucun secret, donnée réelle d’entreprise ou connecteur externe n’est inclus.
 - Le module de contexte n’invente aucune recherche : seules les sources explicitement enregistrées influencent la stratégie.
 
 ## Positionnement
 
-TRAJECTOIRE complète un cockpit d’adoption ou de delivery : il ne demande pas seulement « combien utilisent l’IA ? », mais « qu’est devenue la capacité créée, comment le savons-nous et quelle décision prenons-nous maintenant ? »
+STRATEGY OS complète un cockpit d’adoption ou de delivery : il ne demande pas seulement « combien utilisent l’IA ? », mais « qu’est devenue la capacité créée, comment le savons-nous, quel ROI pouvons-nous défendre et quelle décision prenons-nous maintenant ? »
 
 ---
 

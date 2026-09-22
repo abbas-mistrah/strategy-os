@@ -161,9 +161,9 @@ function renderCommand() {
   const angle = Math.max(12, score * 3.6);
 
   return `${pageHead(
-    'Centre de commandement',
-    'La valeur, de l’effort à la preuve',
-    'Une vue unique des moyens engagés, de leur transformation et de l’impact réellement attribuable à l’entreprise.',
+    'Strategy Command',
+    'From Strategy to Proof of Value',
+    'Design the right transformation strategy. Track execution. Measure impact. Attribute value. Prove ROI.',
     `<button class="button ghost" data-action="navigate" data-view="flows">Voir la chaîne complète →</button><button class="button primary" data-action="new-initiative">＋ Instrumenter une initiative</button>`
   )}
   <section class="hero-grid">
@@ -332,7 +332,7 @@ function renderEvidence() {
     <article class="panel kpi-card"><div class="kpi-label"><span>Valeur constatée</span><i></i></div><strong class="kpi-value">${currency(totals.realized_value, true)}</strong><div class="kpi-foot"><span>${percent(totals.realized_value/Math.max(1,totals.risk_adjusted_value)*100)} du défendable</span><span>plafonnée</span></div></article>
   </section>
   <section class="dashboard-grid">
-    <article class="panel span-12"><div class="panel-head"><div><h3>Échelle de preuve TRAJECTOIRE</h3><p>Le niveau 3 autorise un passage contrôlé à l’échelle ; le niveau 4 autorise une communication externe.</p></div></div>
+    <article class="panel span-12"><div class="panel-head"><div><h3>Échelle de preuve STRATEGY OS</h3><p>Le niveau 3 autorise un passage contrôlé à l’échelle ; le niveau 4 autorise une communication externe.</p></div></div>
       <div class="evidence-levels">${levels.map(item => `<div class="evidence-level ${item.level >= 3 ? 'active' : ''}"><span>NIVEAU ${item.level} · ${item.count} INIT.</span><strong>${item.label}</strong><p>${item.description}</p></div>`).join('')}</div>
     </article>
     <article class="panel span-7"><div class="panel-head"><div><h3>Dernières mesures</h3><p>Valeurs rapprochées des baselines et des cibles déclarées.</p></div></div><div class="evidence-list">
@@ -437,7 +437,7 @@ function renderScenarios() {
         </div>
       </article>
       <article class="panel"><div class="panel-head"><div><h3>Avant / après</h3><p>Lecture directe de l’effet combiné des hypothèses.</p></div></div>
-        <div class="scenario-compare"><div class="compare-state"><span>TRAJECTOIRE ACTUELLE</span><strong>${currency(metrics.baseline,true)}</strong><p>Adoption ${percent(totals.adoption)} · confiance ${percent(totals.confidence)}</p></div><div class="compare-arrow">→</div><div class="compare-state highlight"><span>SCÉNARIO ACTIF</span><strong>${currency(metrics.value,true)}</strong><p>${metrics.delta >= 0 ? 'Valeur additionnelle' : 'Valeur à risque'} : ${currency(Math.abs(metrics.delta),true)}</p></div></div>
+        <div class="scenario-compare"><div class="compare-state"><span>SITUATION ACTUELLE</span><strong>${currency(metrics.baseline,true)}</strong><p>Adoption ${percent(totals.adoption)} · confiance ${percent(totals.confidence)}</p></div><div class="compare-arrow">→</div><div class="compare-state highlight"><span>SCÉNARIO ACTIF</span><strong>${currency(metrics.value,true)}</strong><p>${metrics.delta >= 0 ? 'Valeur additionnelle' : 'Valeur à risque'} : ${currency(Math.abs(metrics.delta),true)}</p></div></div>
       </article>
       <article class="panel"><div class="panel-head"><div><h3>Lecture de décision</h3><p>Interprétation automatique sans présenter l’hypothèse comme une preuve.</p></div></div>
         <div class="decision-rules"><div class="decision-rule"><i>1</i><span>${app.scenario.adoption > 1.1 ? 'Le principal levier est l’adoption : financez le changement avant d’ajouter de nouveaux cas d’usage.' : 'L’adoption reste prudente : le scénario ne suppose pas un changement comportemental irréaliste.'}</span></div><div class="decision-rule"><i>2</i><span>${app.scenario.confidence > 1.1 ? 'La hausse de valeur dépend d’une meilleure preuve : budgétez l’instrumentation et la vérification.' : 'La qualité de preuve reste proche de l’observé ; le scénario conserve une marge d’incertitude.'}</span></div><div class="decision-rule"><i>3</i><span>${app.scenario.speed > 1.15 ? `L’accélération ajoute ${currency(metrics.extraCost,true)} de coût : exigez des jalons de sortie explicites.` : 'Le rythme de déploiement reste soutenable au regard de la capacité de changement.'}</span></div><div class="decision-rule"><i>4</i><span>${app.scenario.reinvestment < .6 ? 'Trop peu de capacité est réallouée : une partie des gains restera invisible dans le compte de résultat.' : 'La réallocation est explicite : la capacité libérée a une destination productive mesurable.'}</span></div></div>
@@ -485,7 +485,7 @@ function renderCurrentView() {
   requestAnimationFrame(() => view.classList.add('view-enter'));
   $('#currentViewLabel').textContent = viewLabels[app.view];
   $$('.nav-item').forEach(button => button.classList.toggle('active', button.dataset.view === app.view));
-  document.title = `${viewLabels[app.view]} · TRAJECTOIRE`;
+  document.title = `${viewLabels[app.view]} · STRATEGY OS`;
   renderSignals();
   bindViewInputs();
 }
@@ -590,7 +590,7 @@ function openEvidence(id) {
 }
 
 function exportModal() {
-  openModal(modalShell('Exporter TRAJECTOIRE', 'Données locales, portables et auditables.', `<div class="grid cols-2"><a class="panel interactive" href="/api/export?format=json" download><div class="panel-head"><div><h3>Export complet JSON</h3><p>Profil, portefeuille, mesures, preuves, stratégie et journal.</p></div><span class="badge blue">.json</span></div><strong style="font-size:1.4rem">Données source</strong></a><a class="panel interactive" href="/api/export?format=csv" download><div class="panel-head"><div><h3>Portefeuille CSV</h3><p>Une ligne par initiative avec les indicateurs calculés.</p></div><span class="badge green">.csv</span></div><strong style="font-size:1.4rem">Analyse tabulaire</strong></a></div><p style="margin:14px 0 0;color:var(--muted);font-size:.64rem;line-height:1.5">Aucune donnée n’est envoyée à un service externe. Les exports sont générés directement depuis la base SQLite locale.</p>`, `<button class="button ghost" data-action="close-modal">Fermer</button>`));
+  openModal(modalShell('Exporter STRATEGY OS', 'Données locales, portables et auditables.', `<div class="grid cols-2"><a class="panel interactive" href="/api/export?format=json" download><div class="panel-head"><div><h3>Export complet JSON</h3><p>Profil, portefeuille, mesures, preuves, stratégie et journal.</p></div><span class="badge blue">.json</span></div><strong style="font-size:1.4rem">Données source</strong></a><a class="panel interactive" href="/api/export?format=csv" download><div class="panel-head"><div><h3>Portefeuille CSV</h3><p>Une ligne par initiative avec les indicateurs calculés.</p></div><span class="badge green">.csv</span></div><strong style="font-size:1.4rem">Analyse tabulaire</strong></a></div><p style="margin:14px 0 0;color:var(--muted);font-size:.64rem;line-height:1.5">Aucune donnée n’est envoyée à un service externe. Les exports sont générés directement depuis la base SQLite locale.</p>`, `<button class="button ghost" data-action="close-modal">Fermer</button>`));
 }
 
 function quickMeasure() {
@@ -747,7 +747,7 @@ async function init() {
     navigate(initial, false);
     if (location.hash.includes('action=new')) openNewInitiative();
   } catch (error) {
-    $('#view').innerHTML = `<div class="empty-state"><div><i>!</i><h3>Impossible de charger TRAJECTOIRE</h3><p>${escapeHtml(error.message)}</p><button class="button primary" onclick="location.reload()">Réessayer</button></div></div>`;
+    $('#view').innerHTML = `<div class="empty-state"><div><i>!</i><h3>Impossible de charger STRATEGY OS</h3><p>${escapeHtml(error.message)}</p><button class="button primary" onclick="location.reload()">Réessayer</button></div></div>`;
   }
 }
 

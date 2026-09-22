@@ -99,7 +99,7 @@ function initiativesCsv(state) {
 async function handleApi(request, response, url) {
   const pathname = url.pathname;
   if (request.method === 'GET' && pathname === '/api/health') {
-    return sendJson(response, 200, { ok: true, service: 'TRAJECTOIRE', database: path.basename(databasePath), time: new Date().toISOString() });
+    return sendJson(response, 200, { ok: true, service: 'STRATEGY OS', database: path.basename(databasePath), time: new Date().toISOString() });
   }
   if (request.method === 'GET' && pathname === '/api/state') {
     return sendJson(response, 200, fullState());
@@ -108,11 +108,11 @@ async function handleApi(request, response, url) {
     const state = fullState();
     if (url.searchParams.get('format') === 'csv') {
       return sendText(response, 200, initiativesCsv(state), 'text/csv; charset=utf-8', {
-        'Content-Disposition': 'attachment; filename="trajectoire-portfolio.csv"'
+        'Content-Disposition': 'attachment; filename="strategy-os-portfolio.csv"'
       });
     }
     return sendText(response, 200, JSON.stringify(state, null, 2), 'application/json; charset=utf-8', {
-      'Content-Disposition': 'attachment; filename="trajectoire-export.json"'
+      'Content-Disposition': 'attachment; filename="strategy-os-export.json"'
     });
   }
   if (request.method === 'POST' && pathname === '/api/profile') {
@@ -197,7 +197,7 @@ const server = http.createServer(async (request, response) => {
 });
 
 server.listen(port, host, () => {
-  console.log(`TRAJECTOIRE · Transformation Value OS`);
+  console.log(`STRATEGY OS · Transformation Intelligence & ROI`);
   console.log(`http://${host}:${port}`);
   console.log(`SQLite: ${databasePath}`);
 });

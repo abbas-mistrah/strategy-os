@@ -1,4 +1,4 @@
-# Architecture technique
+# Architecture technique — STRATEGY OS
 
 ## Objectifs
 

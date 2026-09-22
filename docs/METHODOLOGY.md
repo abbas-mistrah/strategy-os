@@ -2,7 +2,7 @@
 
 ## 1. Principe directeur
 
-TRAJECTOIRE ne considère jamais un gain de temps comme une valeur finale. Une heure libérée devient une valeur uniquement lorsque sa destination est explicite et observée : production additionnelle, revenu, coût évité, qualité, expérience ou réduction de risque.
+STRATEGY OS ne considère jamais un gain de temps comme une valeur finale. Une heure libérée devient une valeur uniquement lorsque sa destination est explicite et observée : production additionnelle, revenu, coût évité, qualité, expérience ou réduction de risque.
 
 Le produit sépare donc cinq objets souvent mélangés :
 
@@ -76,7 +76,7 @@ Un ROI négatif sur un pilote n’est pas automatiquement un échec : il peut ac
 
 ## 6. Anti-double-comptage
 
-TRAJECTOIRE applique les règles suivantes :
+STRATEGY OS applique les règles suivantes :
 
 - une capacité libérée et son revenu aval ne sont pas additionnés si le revenu est la destination de cette même capacité ;
 - la même mesure ne doit avoir qu’un propriétaire économique ;

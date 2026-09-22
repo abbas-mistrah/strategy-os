@@ -26,7 +26,7 @@ if (-not $IsRunning) {
 
 if (-not $IsRunning) {
     Add-Type -AssemblyName PresentationFramework
-    [System.Windows.MessageBox]::Show('TRAJECTOIRE n’a pas pu démarrer. Vérifiez que Node.js 22.5+ est installé.', 'TRAJECTOIRE') | Out-Null
+    [System.Windows.MessageBox]::Show('STRATEGY OS n’a pas pu démarrer. Vérifiez que Node.js 22.5+ est installé.', 'STRATEGY OS') | Out-Null
     exit 1
 }
 
