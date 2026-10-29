@@ -94,6 +94,14 @@ Sous Windows, `launch-strategy-os.ps1` démarre le serveur en arrière-plan et o
 powershell -ExecutionPolicy Bypass -File .\launch-strategy-os.ps1
 ```
 
+Sous macOS ou Linux, `launch-strategy-os.sh` fait la même chose : il vérifie Node.js 22.5+, démarre le serveur en arrière-plan s'il ne tourne pas déjà, attend `/api/health` puis ouvre l'application dans le navigateur (journal dans `data/server.log`, ignoré par Git) :
+
+```bash
+./launch-strategy-os.sh
+```
+
+`PORT` et `HOST` peuvent être changés, par exemple `PORT=4400 ./launch-strategy-os.sh`. Pour démarrer sans ouvrir de navigateur : `STRATEGY_OS_NO_BROWSER=1 ./launch-strategy-os.sh`.
+
 Pour créer le raccourci Bureau :
 
 ```powershell
