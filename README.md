@@ -117,7 +117,7 @@ npm run check
 npm test
 ```
 
-Les tests couvrent le coût complet, l’ajustement de valeur, l’agrégation du portefeuille, la priorisation des départements et le moteur de stratégie.
+Les tests couvrent le moteur (coût complet, ajustement de valeur, agrégation du portefeuille, priorisation des départements, stratégie) et l’API HTTP : `npm test` démarre le vrai serveur sur un port libre avec une base SQLite jetable, puis vérifie santé, état, création et validation d’initiative, routes 404, export CSV et protection des fichiers hors `public/`. La base de `data/` n’est jamais modifiée.
 
 ## Architecture
 

@@ -3,6 +3,11 @@
 All notable changes to Strategy OS are documented here.
 The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and the project uses [Semantic Versioning](https://semver.org/).
 
+## [Unreleased]
+
+### Added
+- `tests/api.test.js`: HTTP API smoke tests. `npm test` now starts the real server on a free local port with a throwaway SQLite file and checks health, state, initiative creation and validation (422), 404 routes, CSV export and that files outside `public/` are never served. The developer database in `data/` is never touched.
+
 ## [1.1.0] - 2026-11-02
 
 ### Added
