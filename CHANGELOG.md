@@ -8,6 +8,13 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 ### Added
 - `tests/api.test.js`: HTTP API smoke tests. `npm test` now starts the real server on a free local port with a throwaway SQLite file and checks health, state, initiative creation and validation (422), 404 routes, CSV export and that files outside `public/` are never served. The developer database in `data/` is never touched.
 
+
+### Fixed
+- A malformed JSON request body now returns `400 Invalid JSON` instead of a `500` server error.
+
+### Security
+- CSV export (`/api/export?format=csv`) neutralises spreadsheet formula injection: text cells starting with `=`, `+`, `-`, `@`, tab or carriage return are prefixed with `'` so Excel, LibreOffice or Google Sheets never run them as formulas. Numbers stay untouched; carriage returns are now quoted too.
+
 ## [1.1.0] - 2026-11-02
 
 ### Added

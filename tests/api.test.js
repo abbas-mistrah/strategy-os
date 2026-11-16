@@ -126,3 +126,26 @@ test('static server does not serve files outside public/', async () => {
   const text = await response2.text();
   assert.ok(!text.includes('handleApi'), 'server source must never be served');
 });
+
+test('malformed JSON body returns 400, not 500', async () => {
+  const response = await fetch(`${base}/api/initiatives`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' }, body: '{"name": '
+  });
+  assert.equal(response.status, 400);
+  assert.equal((await response.json()).error, 'Invalid JSON');
+});
+
+test('CSV export neutralises spreadsheet formula injection', async () => {
+  const name = '=HYPERLINK("http://example.invalid","click")';
+  const created = await fetch(`${base}/api/initiatives`, {
+    method: 'POST', headers: { 'Content-Type': 'application/json' },
+    body: JSON.stringify({ name, owner: '+cmd', investment: 1000, annualized_value: 5000 })
+  });
+  assert.equal(created.status, 201);
+  const csv = await (await fetch(`${base}/api/export?format=csv`)).text();
+  const row = csv.split('\n').find(line => line.includes('HYPERLINK'));
+  assert.ok(row, 'the initiative should be exported');
+  assert.ok(row.includes(`"'=HYPERLINK(""http://example.invalid"",""click"")"`), 'formula must be prefixed with a quote');
+  assert.ok(row.includes(",'+cmd,"), 'owner starting with + must be prefixed');
+  assert.ok(!/,=/.test(row), 'no cell may start with =');
+});

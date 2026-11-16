@@ -83,8 +83,11 @@ function fullState() {
 }
 
 function csvCell(value) {
-  const text = String(value ?? '');
-  return /[",\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
+  let text = String(value ?? '');
+  // Neutralise spreadsheet formula injection (=, +, -, @, tab, CR) on text cells.
+  // Plain numbers such as -1200 or 0.35 stay untouched.
+  if (typeof value !== 'number' && /^[=+\-@\t\r]/.test(text)) text = `'${text}`;
+  return /[",\r\n]/.test(text) ? `"${text.replaceAll('"', '""')}"` : text;
 }
 
 function initiativesCsv(state) {
@@ -192,7 +195,8 @@ const server = http.createServer(async (request, response) => {
     return serveStatic(response, url);
   } catch (error) {
     console.error(error);
-    return sendJson(response, error.message === 'Payload too large' ? 413 : 500, { error: error.message || 'Erreur interne.' });
+    const status = error.message === 'Payload too large' ? 413 : error.message === 'Invalid JSON' ? 400 : 500;
+    return sendJson(response, status, { error: error.message || 'Erreur interne.' });
   }
 });
 
