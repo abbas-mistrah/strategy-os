@@ -64,11 +64,18 @@ function parseBody(request) {
     });
     request.on('end', () => {
       if (!raw) return resolve({});
+      let parsed;
       try {
-        resolve(JSON.parse(raw));
+        parsed = JSON.parse(raw);
       } catch {
-        reject(new Error('Invalid JSON'));
+        return reject(new Error('Invalid JSON'));
       }
+      // Every route expects a JSON object: null, arrays, strings or numbers are rejected
+      // with 400 instead of crashing (null) or being silently accepted as an empty update.
+      if (parsed === null || typeof parsed !== 'object' || Array.isArray(parsed)) {
+        return reject(new Error('JSON body must be an object'));
+      }
+      resolve(parsed);
     });
     request.on('error', reject);
   });
@@ -161,7 +168,13 @@ async function handleApi(request, response, url) {
 
 function serveStatic(response, url) {
   const requested = url.pathname === '/' ? '/index.html' : url.pathname;
-  const relativePath = path.normalize(decodeURIComponent(requested)).replace(/^([.][.][/\\])+/, '');
+  let decoded;
+  try {
+    decoded = decodeURIComponent(requested);
+  } catch {
+    return sendJson(response, 400, { error: 'URL invalide.' });
+  }
+  const relativePath = path.normalize(decoded).replace(/^([.][.][/\\])+/, '');
   const filePath = path.resolve(publicDirectory, `.${path.sep}${relativePath.replace(/^[/\\]/, '')}`);
   if (!filePath.startsWith(publicDirectory)) return sendJson(response, 403, { error: 'Accès refusé.' });
 
@@ -195,7 +208,7 @@ const server = http.createServer(async (request, response) => {
     return serveStatic(response, url);
   } catch (error) {
     console.error(error);
-    const status = error.message === 'Payload too large' ? 413 : error.message === 'Invalid JSON' ? 400 : 500;
+    const status = error.message === 'Payload too large' ? 413 : ['Invalid JSON', 'JSON body must be an object'].includes(error.message) ? 400 : 500;
     return sendJson(response, status, { error: error.message || 'Erreur interne.' });
   }
 });

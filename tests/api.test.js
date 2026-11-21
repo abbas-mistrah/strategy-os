@@ -149,3 +149,19 @@ test('CSV export neutralises spreadsheet formula injection', async () => {
   assert.ok(row.includes(",'+cmd,"), 'owner starting with + must be prefixed');
   assert.ok(!/,=/.test(row), 'no cell may start with =');
 });
+
+test('non-object JSON bodies return 400, not 500 or a silent update', async () => {
+  for (const [method, route] of [['POST', '/api/initiatives'], ['POST', '/api/profile'], ['PATCH', '/api/initiatives/1']]) {
+    for (const body of ['null', '[]', '"text"', '42']) {
+      const response = await fetch(`${base}${route}`, { method, headers: { 'Content-Type': 'application/json' }, body });
+      assert.equal(response.status, 400, `${method} ${route} with ${body}`);
+      assert.equal((await response.json()).error, 'JSON body must be an object');
+    }
+  }
+});
+
+test('malformed percent-encoding in a URL returns 400, not 500', async () => {
+  const response = await fetch(`${base}/%E0%A4%A`);
+  assert.equal(response.status, 400);
+  assert.equal((await response.json()).error, 'URL invalide.');
+});
