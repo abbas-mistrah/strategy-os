@@ -8,6 +8,7 @@ const test = require('node:test');
 const assert = require('node:assert/strict');
 const { spawn } = require('node:child_process');
 const fs = require('node:fs');
+const http = require('node:http');
 const net = require('node:net');
 const os = require('node:os');
 const path = require('node:path');
@@ -164,4 +165,19 @@ test('malformed percent-encoding in a URL returns 400, not 500', async () => {
   const response = await fetch(`${base}/%E0%A4%A`);
   assert.equal(response.status, 400);
   assert.equal((await response.json()).error, 'URL invalide.');
+});
+
+test('a malformed Host header is ignored and does not crash the server', async () => {
+  const { port } = new URL(base);
+  const status = await new Promise((resolve, reject) => {
+    const request = http.request({ host: '127.0.0.1', port, path: '/', headers: { Host: 'a b' } }, response => {
+      response.resume();
+      resolve(response.statusCode);
+    });
+    request.on('error', reject);
+    request.end();
+  });
+  assert.equal(status, 200, 'the page is served from its path, the Host header is not trusted');
+  const health = await fetch(`${base}/api/health`);
+  assert.equal(health.status, 200, 'the server must still be up after a bad Host header');
 });

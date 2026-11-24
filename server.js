@@ -200,16 +200,31 @@ function serveStatic(response, url) {
   });
 }
 
+const clientErrors = new Set(['Invalid JSON', 'JSON body must be an object']);
+
+function requestUrl(request) {
+  // Only the path and query matter here: the Host header is client-controlled, so a malformed
+  // value (for example "a b") must never reach the URL parser and crash the whole server.
+  try {
+    return new URL(request.url, `http://${host}:${port}`);
+  } catch {
+    return null;
+  }
+}
+
 const server = http.createServer(async (request, response) => {
-  const url = new URL(request.url, `http://${request.headers.host || `${host}:${port}`}`);
+  const url = requestUrl(request);
+  if (!url) return sendJson(response, 400, { error: 'URL invalide.' });
   try {
     if (url.pathname.startsWith('/api/')) return await handleApi(request, response, url);
     if (request.method !== 'GET' && request.method !== 'HEAD') return sendJson(response, 405, { error: 'Méthode non autorisée.' });
     return serveStatic(response, url);
   } catch (error) {
     console.error(error);
-    const status = error.message === 'Payload too large' ? 413 : ['Invalid JSON', 'JSON body must be an object'].includes(error.message) ? 400 : 500;
-    return sendJson(response, status, { error: error.message || 'Erreur interne.' });
+    if (error.message === 'Payload too large') return sendJson(response, 413, { error: error.message });
+    if (clientErrors.has(error.message)) return sendJson(response, 400, { error: error.message });
+    // Unexpected failures stay in the server log: the client never sees internal details.
+    return sendJson(response, 500, { error: 'Erreur interne.' });
   }
 });
 

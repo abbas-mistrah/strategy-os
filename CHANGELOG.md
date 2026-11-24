@@ -13,8 +13,10 @@ The format follows [Keep a Changelog](https://keepachangelog.com/en/1.1.0/) and 
 - A malformed JSON request body now returns `400 Invalid JSON` instead of a `500` server error.
 - A JSON body that is not an object (`null`, an array, a string or a number) now returns `400 JSON body must be an object`: `null` used to crash with a `500`, and the others were silently accepted as an empty profile or initiative update.
 - A URL with malformed percent-encoding (for example `/%E0%A4%A`) now returns `400` instead of a `500 URI malformed`.
+- A request with a malformed `Host` header (for example `Host: a b`) no longer crashes the whole server: the URL is now built from the configured host and port, never from the client-controlled header.
 
 ### Security
+- Unexpected `500` errors now answer a generic `Erreur interne.`: internal error messages stay in the server log and are no longer sent to the client.
 - CSV export (`/api/export?format=csv`) neutralises spreadsheet formula injection: text cells starting with `=`, `+`, `-`, `@`, tab or carriage return are prefixed with `'` so Excel, LibreOffice or Google Sheets never run them as formulas. Numbers stay untouched; carriage returns are now quoted too.
 
 ## [1.1.0] - 2026-11-02
